@@ -3,7 +3,7 @@ Simple Stationeers server.
 
 ## Running the server
 ```bash
-docker run --detach --name stationeers --publish 27500:27500/udp 27015:27015/udp hetsh/stationeers
+docker run --detach --name stationeers --publish 27500:27500/udp --publish 27015:27015/udp hetsh/stationeers
 ```
 
 ## Stopping the container
