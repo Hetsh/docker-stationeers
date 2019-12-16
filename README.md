@@ -11,6 +11,11 @@ docker run --detach --name stationeers --publish 27500:27500/udp --publish 27015
 docker stop stationeers
 ```
 
+## Configuring Maps
+Maps (worlds) are configured via environment variables `WORLD_TYPE` and `WORLD_NAME` with default values `Moon` and `Base`.
+To create a new world use additional parameters (Mars only example) `--env WORLD_TYPE=Mars --env WORLD_NAME=MarsBase` when launching the container.
+If `WORLD_NAME` already exists, the save is loaded instead and `WORLD_TYPE` is ignored.
+
 ## Creating persistent storage
 ```bash
 MP="/path/to/storage"
@@ -25,9 +30,11 @@ docker run --mount type=bind,source=/path/to/storage,target=/stationeers ...
 
 ## Automate startup and shutdown via systemd
 ```bash
-systemctl enable stationeers@<port> --now
+systemctl enable stationeers@<world> --now
 ```
-The systemd unit can be found in my [GitHub](https://github.com/Hetsh/docker-stationeers) repository. Individual server instances are distinguished by host-port. By default, the systemd service assumes `/srv/stationeers_<port>` for persistent storage.
+The systemd unit can be found in my [GitHub](https://github.com/Hetsh/docker-stationeers) repository.
+Individual server instances are distinguished by world.
+By default, the systemd service assumes `/srv/stationeers_<world>` for persistent storage.
 
 ## Fork Me!
 This is an open project (visit [GitHub](https://github.com/Hetsh/docker-stationeers)). Please feel free to ask questions, file an issue or contribute to it.

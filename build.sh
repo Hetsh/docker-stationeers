@@ -20,5 +20,11 @@ then
 	trap "rm -rf $TMP_DIR" exit
 	chown -R "$APP_UID":"$APP_UID" "$TMP_DIR"
 	
-	docker run --rm --interactive --name stationeers --publish 27500:27500/udp --publish 27015:27015/udp --mount type=bind,source="$TMP_DIR",target=/stationeers stationeers
+	docker run \
+	--rm \
+	--interactive \
+	--publish 27500:27500/udp \
+	--publish 27015:27015/udp \
+	--mount type=bind,source="$TMP_DIR",target="/$APP_NAME" \
+	"$APP_NAME"
 fi
