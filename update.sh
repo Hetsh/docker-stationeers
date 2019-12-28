@@ -65,17 +65,24 @@ else
 	read -p "Save changes? [y/n]" -n 1 -r && echo
 	if [[ $REPLY =~ ^[Yy]$ ]]
 	then
-	sed -i "s|FROM hetsh/steamcmd:.*|FROM hetsh/steamcmd:$STEAMCMD_VERSION|" Dockerfile
-	sed -i "s|ARG RS_MANIFEST_ID=\".*\"|ARG RS_MANIFEST_ID=\"$MANIFEST_ID\"|" Dockerfile
+		if [ "$CURRENT_STEAMCMD_VERSION" != "$STEAMCMD_VERSION" ]
+		then
+			sed -i "s|FROM hetsh/steamcmd:.*|FROM hetsh/steamcmd:$STEAMCMD_VERSION|" Dockerfile
+		fi
 
-	read -p "Commit changes? [y/n]" -n 1 -r && echo
-	if [[ $REPLY =~ ^[Yy]$ ]]
-	then
-		git add Dockerfile
-		git commit -m "Version bump to $NEXT_VERSION"
-		git push
-		git tag "$NEXT_VERSION"
-		git push origin "$NEXT_VERSION"
-	fi
+		if [ "$CURRENT_MANIFEST_ID" != "$MANIFEST_ID" ]
+		then
+			sed -i "s|ARG RS_MANIFEST_ID=\".*\"|ARG RS_MANIFEST_ID=\"$MANIFEST_ID\"|" Dockerfile
+		fi
+
+		read -p "Commit changes? [y/n]" -n 1 -r && echo
+		if [[ $REPLY =~ ^[Yy]$ ]]
+		then
+			git add Dockerfile
+			git commit -m "Version bump to $NEXT_VERSION"
+			git push
+			git tag "$NEXT_VERSION"
+			git push origin "$NEXT_VERSION"
+		fi
 	fi
 fi
