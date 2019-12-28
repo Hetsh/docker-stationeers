@@ -37,7 +37,7 @@ then
 fi
 
 # Stationeers Manifest
-CURRENT_MANIFEST_ID=$(cat Dockerfile | grep "ARG RS_MANIFEST_ID=.*")
+CURRENT_MANIFEST_ID=$(cat Dockerfile | grep "ARG MANIFEST_ID=")
 CURRENT_MANIFEST_ID=${CURRENT_MANIFEST_ID#*=}
 MANIFEST_ID=$(curl -L -s 'https://steamdb.info/depot/600762/' | grep -P -o "<td>\d+" | tr -d '<td>' | tail -n 1)
 if [ "$CURRENT_MANIFEST_ID" != "$MANIFEST_ID" ]
