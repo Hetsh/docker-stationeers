@@ -9,7 +9,6 @@ then
 	exit -1
 fi
 
-APP_UID=1358
 APP_NAME="stationeers"
 docker build --tag "$APP_NAME" .
 
@@ -18,6 +17,8 @@ if [[ $REPLY =~ ^[Yy]$ ]]
 then
 	TMP_DIR=$(mktemp -d "/tmp/$APP_NAME-XXXXXXXXXX")
 	trap "rm -rf $TMP_DIR" exit
+
+	APP_UID=1358
 	chown -R "$APP_UID":"$APP_UID" "$TMP_DIR"
 	
 	docker run \
