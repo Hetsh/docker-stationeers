@@ -1,4 +1,4 @@
-FROM hetsh/steamcmd:1.0-1
+FROM hetsh/steamcmd:1.1-1
 
 ARG APP_DIR="/stationeers"
 ARG APP_USER="rocket"
