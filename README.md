@@ -1,5 +1,5 @@
 # Stationeers
-Simple Stationeers server.
+Simple stationeers server.
 
 ## Running the server
 ```bash

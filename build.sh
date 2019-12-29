@@ -9,6 +9,9 @@ then
 	exit -1
 fi
 
+WORK_DIR="${0%/*}"
+cd "$WORK_DIR"
+
 APP_NAME="stationeers"
 docker build --tag "$APP_NAME" .
 
@@ -25,6 +28,7 @@ then
 	--rm \
 	--interactive \
 	--publish 27500:27500/udp \
+	--publish 27500:27500/tcp \
 	--publish 27015:27015/udp \
 	--mount type=bind,source="$TMP_DIR",target="/$APP_NAME" \
 	"$APP_NAME"

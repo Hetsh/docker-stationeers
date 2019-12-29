@@ -30,7 +30,7 @@ NEXT_VERSION="$CURRENT_VERSION"
 # SteamCMD
 CURRENT_STEAMCMD_VERSION=$(cat Dockerfile | grep "FROM hetsh/steamcmd:")
 CURRENT_STEAMCMD_VERSION="${CURRENT_STEAMCMD_VERSION#*:}"
-STEAMCMD_VERSION=$(curl -L -s 'https://registry.hub.docker.com/v2/repositories/hetsh/steamcmd/tags' | jq '."results"[]["name"]' | grep -P -o "(\d+\.)+\d+-\d+" | head -n 1)
+STEAMCMD_VERSION=$(curl -L -s 'https://registry.hub.docker.com/v2/repositories/hetsh/steamcmd/tags' | jq '."results"[]["name"]' | grep -m 1 -P -o "(\d+\.)+\d+-\d+" )
 if [ "$CURRENT_STEAMCMD_VERSION" != "$STEAMCMD_VERSION" ]
 then
 	echo "SteamCMD $STEAMCMD_VERSION available!"
