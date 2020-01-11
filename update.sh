@@ -27,10 +27,11 @@ cd "$WORK_DIR"
 CURRENT_VERSION=$(git describe --tags --abbrev=0)
 NEXT_VERSION="$CURRENT_VERSION"
 
-# SteamCMD
-CURRENT_STEAMCMD_VERSION=$(cat Dockerfile | grep "FROM hetsh/steamcmd:")
+# Base Image
+IMAGE_NAME="hetsh/steamcmd"
+CURRENT_STEAMCMD_VERSION=$(cat Dockerfile | grep "FROM $IMAGE_NAME:")
 CURRENT_STEAMCMD_VERSION="${CURRENT_STEAMCMD_VERSION#*:}"
-STEAMCMD_VERSION=$(curl -L -s 'https://registry.hub.docker.com/v2/repositories/hetsh/steamcmd/tags' | jq '."results"[]["name"]' | grep -m 1 -P -o "(\d+\.)+\d+-\d+" )
+STEAMCMD_VERSION=$(curl -L -s "https://registry.hub.docker.com/v2/repositories/$IMAGE_NAME/tags" | jq '."results"[]["name"]' | grep -m 1 -P -o "(\d+\.)+\d+-\d+" )
 if [ "$CURRENT_STEAMCMD_VERSION" != "$STEAMCMD_VERSION" ]
 then
 	echo "SteamCMD $STEAMCMD_VERSION available!"
@@ -65,12 +66,18 @@ if [ "$CURRENT_VERSION" == "$NEXT_VERSION" ]
 then
 	echo "No updates available."
 else
-	read -p "Save changes? [y/n]" -n 1 -r && echo
-	if [[ $REPLY =~ ^[Yy]$ ]]
+	if [ "$1" == "--noconfirm" ]
+	then
+		SAVE="y"
+	else
+		read -p "Save changes? [y/n]" -n 1 -r SAVE && echo
+	fi
+	
+	if [[ $SAVE =~ ^[Yy]$ ]]
 	then
 		if [ "$CURRENT_STEAMCMD_VERSION" != "$STEAMCMD_VERSION" ]
 		then
-			sed -i "s|FROM hetsh/steamcmd:.*|FROM hetsh/steamcmd:$STEAMCMD_VERSION|" Dockerfile
+			sed -i "s|FROM $IMAGE_NAME:.*|FROM $IMAGE_NAME:$STEAMCMD_VERSION|" Dockerfile
 		fi
 
 		if [ "$CURRENT_MANIFEST_ID" != "$MANIFEST_ID" ]
@@ -78,8 +85,14 @@ else
 			sed -i "s|ARG RS_MANIFEST_ID=\".*\"|ARG RS_MANIFEST_ID=\"$MANIFEST_ID\"|" Dockerfile
 		fi
 
-		read -p "Commit changes? [y/n]" -n 1 -r && echo
-		if [[ $REPLY =~ ^[Yy]$ ]]
+		if [ "$1" == "--noconfirm" ]
+		then
+			COMMIT="y"
+		else
+			read -p "Commit changes? [y/n]" -n 1 -r COMMIT && echo
+		fi
+
+		if [[ $COMMIT =~ ^[Yy]$ ]]
 		then
 			git add Dockerfile
 			git commit -m "Version bump to $NEXT_VERSION"
