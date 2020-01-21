@@ -31,5 +31,6 @@ then
 	--publish 27500:27500/tcp \
 	--publish 27015:27015/udp \
 	--mount type=bind,source="$TMP_DIR",target="/$APP_NAME" \
+	--name "$APP_NAME" \
 	"$APP_NAME"
 fi
