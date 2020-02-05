@@ -1,29 +1,37 @@
 #!/usr/bin/env bash
 
-set -e
-trap "exit" SIGINT
 
-if ! docker version &> /dev/null
-then
-	echo "Docker daemon is not running or you have unsufficient permissions!"
-	exit -1
+# Abort on any error
+set -eu
+
+# Simpler git usage, relative file paths
+CWD=$(dirname "$0")
+cd "$CWD"
+
+# Load helpful functions
+source libs/common.sh
+
+# Check acces do docker daemon
+assert_dependency "docker"
+if ! docker version &> /dev/null; then
+    echo "Docker daemon is not running or you have unsufficient permissions!"
+    exit -1
 fi
 
-WORK_DIR="${0%/*}"
-cd "$WORK_DIR"
-
+# Build the image
 APP_NAME="stationeers"
 docker build --tag "$APP_NAME" .
 
-read -p "Test image? [y/n]" -n 1 -r && echo
-if [[ $REPLY =~ ^[Yy]$ ]]
-then
+if confirm_action "Test image?"; then
+	# Set up temporary directory
 	TMP_DIR=$(mktemp -d "/tmp/$APP_NAME-XXXXXXXXXX")
-	trap "rm -rf $TMP_DIR" exit
+	add_cleanup "rm -rf $TMP_DIR"
 
+	# Apply permissions, UID matches process user
 	APP_UID=1358
 	chown -R "$APP_UID":"$APP_UID" "$TMP_DIR"
-	
+
+	# Start the test
 	docker run \
 	--rm \
 	--interactive \
