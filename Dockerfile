@@ -6,7 +6,7 @@ RUN useradd -r -m -d "$APP_DIR" -u 1358 "$APP_USER"
 
 ARG APP_ID=600760
 ARG DEPOT_ID=600762
-ARG MANIFEST_ID=3766921144342894408
+ARG MANIFEST_ID=3366393284240606147
 RUN "./steamcmd.sh" +login anonymous +download_depot "$APP_ID" "$DEPOT_ID" "$MANIFEST_ID" +quit && \
     chown -R "$APP_USER":"$APP_USER" .
 
