@@ -2,7 +2,7 @@
 
 
 # Abort on any error
-set -eu
+set -e -u
 
 # Simpler git usage, relative file paths
 CWD=$(dirname "$0")

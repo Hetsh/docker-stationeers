@@ -2,7 +2,7 @@
 
 
 # Abort on any error
-set -eu
+set -e -u
 
 # Simpler git usage, relative file paths
 CWD=$(dirname "$0")
@@ -10,14 +10,11 @@ cd "$CWD"
 
 # Load helpful functions
 source libs/common.sh
-source libs/custom.sh
+source libs/docker.sh
 
 # Check dependencies
 assert_dependency "jq"
 assert_dependency "curl"
-
-# Current version of docker image
-register_current_version
 
 # Base Image
 update_image "hetsh/steamcmd" "SteamCMD" "(\d+\.)+\d+-\d+"
