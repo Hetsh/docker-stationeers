@@ -4,7 +4,16 @@ After=docker.service
 Requires=docker.service
 
 [Service]
-ExecStartPre=-/bin/docker create --env WORLD_TYPE=%I --env WORLD_NAME=%I --rm --interactive --name stationeers_%I --publish 27500:27500/udp --publish 27015:27015/udp --mount type=bind,source=/srv/stationeers_%I,target=/stationeers hetsh/stationeers
+ExecStartPre=-/bin/docker create \
+              --env WORLD_TYPE=%I \
+              --env WORLD_NAME=%I \
+              --rm \
+              --interactive \
+              --name stationeers_%I \
+              --publish 27500:27500/udp \
+              --publish 27015:27015/udp \
+              --mount type=bind,source=/srv/stationeers_%I,target=/stationeers \
+              hetsh/stationeers
 ExecStart=/bin/docker start --attach stationeers_%I
 ExecStop=/bin/docker stop stationeers_%I
 
