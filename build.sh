@@ -28,17 +28,18 @@ if confirm_action "Test image?"; then
 	add_cleanup "rm -rf $TMP_DIR"
 
 	# Apply permissions, UID matches process user
-	APP_UID=1358
+	extract_var APP_UID "Dockerfile" "\K\d+"
 	chown -R "$APP_UID":"$APP_UID" "$TMP_DIR"
 
 	# Start the test
+	extract_var DATA_DIR "Dockerfile" "\"\K[^\"]+"
 	docker run \
 	--rm \
 	--interactive \
 	--publish 27500:27500/udp \
 	--publish 27500:27500/tcp \
 	--publish 27015:27015/udp \
-	--mount type=bind,source="$TMP_DIR",target="/$APP_NAME" \
+	--mount type=bind,source="$TMP_DIR",target="/$DATA_DIR" \
 	--name "$APP_NAME" \
 	"$APP_NAME"
 fi
