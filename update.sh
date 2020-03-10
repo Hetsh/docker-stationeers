@@ -44,10 +44,10 @@ if ! updates_available; then
 fi
 
 # Perform modifications
-if [ "${1+}" = "--noconfirm" ] || confirm_action "Save changes?"; then
+if [ "${1-}" = "--noconfirm" ] || confirm_action "Save changes?"; then
 	save_changes
 
-	if [ "${1+}" = "--noconfirm" ] || confirm_action "Commit changes?"; then
+	if [ "${1-}" = "--noconfirm" ] || confirm_action "Commit changes?"; then
 		commit_changes
 	fi
 fi
