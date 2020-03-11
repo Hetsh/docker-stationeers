@@ -12,7 +12,8 @@ ExecStartPre=-/bin/docker create \
               --name stationeers_%I \
               --publish 27500:27500/udp \
               --publish 27015:27015/udp \
-              --mount type=bind,source=/srv/stationeers_%I,target=/stationeers \
+              --mount type=bind,source=/etc/stationeers/%I,target=/stationeers \
+              --mount type=bind,source=/etc/localtime,target=/etc/localtime,readonly \
               hetsh/stationeers
 ExecStart=/bin/docker start --attach stationeers_%I
 ExecStop=/bin/docker stop stationeers_%I
