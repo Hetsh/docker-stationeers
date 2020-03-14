@@ -11,11 +11,11 @@ cd "$CWD"
 # Load helpful functions
 source libs/common.sh
 
-# Check acces do docker daemon
+# Check access to docker daemon
 assert_dependency "docker"
 if ! docker version &> /dev/null; then
-    echo "Docker daemon is not running or you have unsufficient permissions!"
-    exit -1
+	echo "Docker daemon is not running or you have unsufficient permissions!"
+	exit -1
 fi
 
 # Build the image
@@ -40,6 +40,7 @@ if confirm_action "Test image?"; then
 	--publish 27500:27500/tcp \
 	--publish 27015:27015/udp \
 	--mount type=bind,source="$TMP_DIR",target="/$DATA_DIR" \
+	--mount type=bind,source=/etc/localtime,target=/etc/localtime,readonly \
 	--name "$APP_NAME" \
 	"$APP_NAME"
 fi
