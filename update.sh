@@ -17,7 +17,7 @@ assert_dependency "jq"
 assert_dependency "curl"
 
 # Base Image
-update_image "hetsh/steamcmd" "SteamCMD" "(\d+\.)+\d+-\d+"
+update_image "hetsh/steamcmd" "SteamCMD" "false" "(\d+\.)+\d+-\d+"
 
 # Stationeers
 RS_PKG="MANIFEST_ID" # Steam depot id for identification
