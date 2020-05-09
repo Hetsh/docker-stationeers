@@ -16,17 +16,16 @@ source libs/docker.sh
 assert_dependency "jq"
 assert_dependency "curl"
 
-# Base Image
+# Debian Stable with SteamCMD
 update_image "hetsh/steamcmd" "SteamCMD" "false" "(\d+\.)+\d+-\d+"
 
 # Stationeers
 RS_PKG="MANIFEST_ID" # Steam depot id for identification
-RS_NAME="Stationeers"
 RS_REGEX="\d+"
 CURRENT_RS_VERSION=$(cat Dockerfile | grep -P -o "$RS_PKG=\K$RS_REGEX")
 NEW_RS_VERSION=$(curl -L -s "https://steamdb.info/depot/600762/" | grep -P -o "<td>\K$RS_REGEX" | tail -n 1)
 if [ "$CURRENT_RS_VERSION" != "$NEW_RS_VERSION" ]; then
-	prepare_update "$RS_PKG" "$RS_NAME" "$CURRENT_RS_VERSION" "$NEW_RS_VERSION"
+	prepare_update "$RS_PKG" "Stationeers" "$CURRENT_RS_VERSION" "$NEW_RS_VERSION"
 
 	# Scrape actual stationeers Version
 	NEW_ACTUAL_RS_VERSION=$(curl -L -s "https://store.steampowered.com/news/?appids=544550&appgroupname=Stationeers" | grep -P -o "(\d+\.){3}\d+" | head -n 1)
