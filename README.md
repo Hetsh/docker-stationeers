@@ -12,7 +12,7 @@ docker stop stationeers
 ```
 
 ## Updates
-This image contains a specific version of the game and will not update on startup, this decreases starting time and disk space usage. The image is updated daily by checking the steam depot version that can also be found on [SteamDB](https://steamdb.info/depot/376031/).
+This image contains a specific version of the game and will not update on startup, this decreases starting time and disk space usage. Version number is the manifest id that can also be found on [SteamDB](https://steamdb.info/depot/600762/). This id and therefore the image on docker hub is updated daily.
 
 ## Configuring Maps
 Maps (worlds) are configured via environment variables `WORLD_TYPE` and `WORLD_NAME` with default values `Moon` and `Base`.
