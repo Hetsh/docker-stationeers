@@ -1,5 +1,5 @@
 # Stationeers
-Simple stationeers server.
+Simple to set up stationeers server.
 
 ## Running the server
 ```bash
@@ -10,6 +10,9 @@ docker run --detach --name stationeers --publish 27500:27500/udp --publish 27015
 ```bash
 docker stop stationeers
 ```
+
+## Updates
+This image contains a specific version of the game and will not update on startup, this decreases starting time and disk space usage. The image is updated daily by checking the steam depot version that can also be found on [SteamDB](https://steamdb.info/depot/376031/).
 
 ## Configuring Maps
 Maps (worlds) are configured via environment variables `WORLD_TYPE` and `WORLD_NAME` with default values `Moon` and `Base`.
