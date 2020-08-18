@@ -30,7 +30,7 @@ if [ "$CURRENT_RS_VERSION" != "$NEW_RS_VERSION" ]; then
 fi
 
 if ! updates_available; then
-	echo "No updates available."
+	#echo "No updates available."
 	exit 0
 fi
 
