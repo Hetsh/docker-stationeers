@@ -21,9 +21,9 @@ update_image "hetsh/steamcmd" "SteamCMD" "false" "(\d+\.)+\d+-\d+"
 
 # Stationeers
 RS_PKG="MANIFEST_ID" # Steam depot id for identification
-RS_REGEX="\d+"
-CURRENT_RS_VERSION=$(cat Dockerfile | grep -P -o "$RS_PKG=\K$RS_REGEX")
-NEW_RS_VERSION=$(curl --silent --location "https://steamdb.info/depot/600762/" | grep -P -o "<td>\K$RS_REGEX" | tail -n 1)
+RS_REGEX="\d{17,19}"
+CURRENT_RS_VERSION=$(cat Dockerfile | grep -P -o "(?<=$RS_PKG=)$RS_REGEX")
+NEW_RS_VERSION=$(curl --silent --location "https://steamdb.info/depot/600762" | grep -P -o "(?<=<td>)$RS_REGEX(?=</td>)" | tail -n 1)
 if [ "$CURRENT_RS_VERSION" != "$NEW_RS_VERSION" ]; then
 	prepare_update "$RS_PKG" "Stationeers" "$CURRENT_RS_VERSION" "$NEW_RS_VERSION"
 	update_version "$NEW_RS_VERSION"
