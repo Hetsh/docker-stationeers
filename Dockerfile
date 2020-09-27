@@ -34,6 +34,7 @@ ENV SAVE_INTERVAL="300"
 ENV CLEAR_INTERVAL="60"
 ENV WORLD_TYPE="Moon"
 ENV WORLD_NAME="Base"
+ENV SERVER_OPTS=""
 ENTRYPOINT exec "$APP_DIR/rocketstation_DedicatedServer.x86_64" \
     -batchmode \
     -nographics \
@@ -45,5 +46,6 @@ ENTRYPOINT exec "$APP_DIR/rocketstation_DedicatedServer.x86_64" \
     -worldtype="$WORLD_TYPE" \
     -worldname="$WORLD_NAME" \
     -loadworld="$WORLD_NAME" \
+    $SERVER_OPTS \
     1> "$LOG_DIR/info.log" \
     2> "$LOG_DIR/error.log"
