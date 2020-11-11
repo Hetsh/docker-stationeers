@@ -46,6 +46,4 @@ ENTRYPOINT exec "$APP_DIR/rocketstation_DedicatedServer.x86_64" \
     -worldtype="$WORLD_TYPE" \
     -worldname="$WORLD_NAME" \
     -loadworld="$WORLD_NAME" \
-    $SERVER_OPTS \
-    1> "$LOG_DIR/info.log" \
-    2> "$LOG_DIR/error.log"
+    $SERVER_OPTS
