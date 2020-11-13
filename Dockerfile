@@ -1,4 +1,4 @@
-FROM hetsh/steamcmd:1.1-16
+FROM hetsh/steamcmd:1.2-1
 
 # App user
 ARG APP_USER="rocket"
@@ -28,14 +28,14 @@ EXPOSE 27500/udp 27500/tcp 27015/udp
 # Launch parameters
 USER "$APP_USER"
 WORKDIR "$DATA_DIR"
-ENV APP_DIR="$APP_DIR"
-ENV LOG_DIR="$LOG_DIR"
-ENV DATA_DIR="$DATA_DIR"
-ENV SAVE_INTERVAL="300"
-ENV CLEAR_INTERVAL="60"
-ENV WORLD_TYPE="Moon"
-ENV WORLD_NAME="Base"
-ENV SERVER_OPTS=""
+ENV APP_DIR="$APP_DIR" \
+    LOG_DIR="$LOG_DIR" \
+    DATA_DIR="$DATA_DIR" \
+    SAVE_INTERVAL="300" \
+    CLEAR_INTERVAL="60" \
+    WORLD_TYPE="Moon" \
+    WORLD_NAME="Base" \
+    SERVER_OPTS=""
 ENTRYPOINT exec "$APP_DIR/rocketstation_DedicatedServer.x86_64" \
     -batchmode \
     -nographics \
