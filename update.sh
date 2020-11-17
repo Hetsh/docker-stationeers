@@ -20,14 +20,7 @@ assert_dependency "curl"
 update_image "hetsh/steamcmd" "SteamCMD" "false" "(\d+\.)+\d+-\d+"
 
 # Stationeers
-MAN_ID="MANIFEST_ID" # Steam depot id for identification
-MAN_REGEX="\d{17,19}"
-CURRENT_RS_VERSION=$(cat Dockerfile | grep -P -o "(?<=$MAN_ID=)$MAN_REGEX")
-NEW_RS_VERSION=$(curl --silent --location "https://steamdb.info/depot/600762" | grep -P -o "(?<=<td>)$MAN_REGEX(?=</td>)" | tail -n 1)
-if [ "$CURRENT_RS_VERSION" != "$NEW_RS_VERSION" ]; then
-	prepare_update "$MAN_ID" "Stationeers" "$CURRENT_RS_VERSION" "$NEW_RS_VERSION"
-	update_version "$NEW_RS_VERSION"
-fi
+update_depot "600762" "MANIFEST_ID" "Stationeers" "true"
 
 if ! updates_available; then
 	#echo "No updates available."
