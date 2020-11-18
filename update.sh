@@ -17,7 +17,7 @@ assert_dependency "jq"
 assert_dependency "curl"
 
 # Debian Stable with SteamCMD
-update_image "hetsh/steamcmd" "SteamCMD" "false" "(\d+\.)+\d+-\d+"
+update_image "hetsh/steamcmd" "SteamCMD" "false" "\d+-\d+"
 
 # Stationeers
 update_depot "600762" "MANIFEST_ID" "Stationeers" "true"
