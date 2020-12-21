@@ -9,7 +9,7 @@ RUN useradd --uid "$APP_UID" --user-group --create-home --home "$DATA_DIR" --she
 # Application
 ARG APP_ID=600760
 ARG DEPOT_ID=600762
-ARG MANIFEST_ID=3861943373358868321
+ARG MANIFEST_ID=5990251720178647981
 ARG APP_DIR="$STEAM_DIR/linux32/steamapps/content/app_$APP_ID/depot_$DEPOT_ID"
 RUN steamcmd.sh +login anonymous +download_depot "$APP_ID" "$DEPOT_ID" "$MANIFEST_ID" +quit && \
     find "$APP_DIR" -type d -name ".svn" -depth -exec rm -r {} \; && \
