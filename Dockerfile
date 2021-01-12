@@ -1,4 +1,4 @@
-FROM hetsh/steamcmd:20201118-2
+FROM hetsh/steamcmd:20201118-3
 
 # App user
 ARG APP_USER="rocket"
