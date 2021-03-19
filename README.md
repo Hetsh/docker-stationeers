@@ -32,7 +32,7 @@ docker run --mount type=bind,source=/path/to/storage,target=/stationeers ...
 ```
 
 ## Using Docker Compose
-A contributed docker compose file has been included in this repository.  Modify to suit your own needs, the comments should make it clear.
+An exemplary docker-compose file is included in the GitHub [repository](https://github.com/Hetsh/docker-stationeers) (credit to [spannerman79](https://github.com/spannerman79)).  Modify to own needs, the comments should make it clear.
 
 ## Automate startup and shutdown via systemd
 The systemd unit can be found in my GitHub [repository](https://github.com/Hetsh/docker-stationeers).
