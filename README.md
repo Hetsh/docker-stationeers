@@ -31,6 +31,9 @@ Start the server with the additional mount flag:
 docker run --mount type=bind,source=/path/to/storage,target=/stationeers ...
 ```
 
+## Using Docker Compose
+A contributed docker compose file has been included in this repository.  Modify to suit your own needs, the comments should make it clear.
+
 ## Automate startup and shutdown via systemd
 The systemd unit can be found in my GitHub [repository](https://github.com/Hetsh/docker-stationeers).
 ```bash

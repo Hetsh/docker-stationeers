@@ -1,0 +1,25 @@
+version: "3.3"
+volumes:
+  logs:
+services:
+  stationeers:
+    container_name: stationeers # Change me if needed
+#    stdin_open: true # docker run -i - uncomment for testing
+#    tty: true # docker run -t - uncomment for testing
+    ports:
+      - "27500:27500/udp" # Game Port - default 27500/udp
+      - "27500:27500/tcp" # Web RCON Port - Same as Game port - default 27500/tcp
+      - "27015:27015/udp" # Steam Update Port - default 27015/udp
+    image: hetsh/stationeers:latest # For Modded servers: Best you define the exact label.
+    environment:
+      - WORLD_TYPE=Mars
+      - WORLD_NAME=mars_save
+#      - SAVE_INTERVAL=300 # Uncomment to change the save interval - default =300
+#      - CLEAR_INTERVAL=-1 # Uncomment to set the idle player clearing to be disabled.
+#      - SERVER_OPTS=-bindip x.x.x.x # Uncomment to set an IP assigned via ZeroTier running on the same docker host.
+    volumes:
+      - "logs:/var/log/stationeers"
+#      - "/path/to/modded_data/modded.xml:/var/lib/steam/linux32/steamapps/content/app_600760/depot_600762/rocketstation_DedicatedServer_Data/StreamingAssets/Data/modded.xml:ro" # Modded Servers - enforce your xml changes like this
+      - "/path/to/storage/:/stationeers" # persistent data storage - saves, default.ini etc
+      - "/etc/localtime:/etc/localtime:ro"
+      - "/etc/timezone:/etc/timezone:ro"
