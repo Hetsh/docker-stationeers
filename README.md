@@ -34,6 +34,14 @@ This image contains a specific version of the game and will not update on startu
 Version number is the manifest id that can also be found on [SteamDB](https://steamdb.info/depot/600762).
 This id and therefore the image on docker hub is updated hourly.
 
+## Modding
+Due to the early stage of the game, modding a dedicated server is somewhat inconvenient.
+One way is to override the games `.xml` files:
+```
+docker run --mount /path/to/modded.xml:/var/lib/steam/linux32/steamapps/content/app_600760/depot_600762/rocketstation_DedicatedServer_Data/StreamingAssets/Data/original.xml:ro ...
+```
+To ensure compatibility with mods, you should always specify the image version `hetsh/stationeers:<manifest_id>` and only upgrade once all mods are compatible.
+
 ## Automate startup and shutdown via systemd
 This [systemd unit file](https://github.com/Hetsh/docker-stationeers/blob/master/stationeers%40.service) is intended to launch containers on startup without additional software and only depends on a running docker daemon.
 It fits my personal setup, so you might need to adjust some parameters to your needs.
