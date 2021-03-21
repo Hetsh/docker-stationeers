@@ -1,0 +1,17 @@
+version: "3.3"
+services:
+  stationeers:
+    image: hetsh/stationeers
+    ports:
+      - "27500:27500/udp" # Game Port (required) - client-server communication
+      - "27015:27015/udp" # Steam Port (recommended - required for listing in server browser)
+#     - "27500:27500/tcp" # RCON Port (optional) - server control via network
+    environment:
+      - WORLD_TYPE=Mars # Play on Mars - default is Moon
+      - WORLD_NAME=Mars # Rename save - default is Base
+#     - SAVE_INTERVAL=120 #  Increase save frequency - default is 300 seconds
+#     - CLEAR_INTERVAL=-1 # Disable idle player clearing - default is 60 seconds
+    volumes:
+      - "/path/to/storage/logs:/var/log/stationeers" # Save game logs
+      - "/path/to/storage/data:/stationeers" # Persistent storage for saves, default.ini, ...
+      - "/etc/localtime:/etc/localtime:ro" # Correct time for logs and more

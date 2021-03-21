@@ -50,6 +50,10 @@ Because this is a template unit file, you can easily change the world:
 systemctl enable stationeers@<world> --now
 ```
 
+## Docker-Compose
+An examplary [docker-compose file](https://github.com/Hetsh/docker-stationeers/blob/master/docker-compose.yml) was adapted from [#5](https://github.com/Hetsh/docker-stationeers/pull/5).
+It is intended to get you up and running quickly with docker-compose. It also showcases some basic configuration changes.
+
 ## Fork Me!
 This is an open project (visit [GitHub](https://github.com/Hetsh/docker-stationeers)).
 Please feel free to ask questions, file an issue or contribute to it.
