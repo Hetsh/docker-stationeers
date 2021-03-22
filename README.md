@@ -29,19 +29,6 @@ Maps (worlds) are configured via environment variables `WORLD_TYPE` and `WORLD_N
 To change the world, launch the server with additional parameters (Mars example) `--env WORLD_TYPE=Mars --env WORLD_NAME=MarsBase`.
 If `WORLD_NAME` already exists, the save is loaded instead and `WORLD_TYPE` is ignored.
 
-## Updates
-This image contains a specific version of the game and will not update on startup, this decreases starting time and disk space usage.
-Version number is the manifest id that can also be found on [SteamDB](https://steamdb.info/depot/600762).
-This id and therefore the image on docker hub is updated hourly.
-
-## Modding
-Due to the early stage of the game, modding a dedicated server is somewhat inconvenient.
-One way is to override the games `.xml` files:
-```
-docker run --mount /path/to/modded.xml:/var/lib/steam/linux32/steamapps/content/app_600760/depot_600762/rocketstation_DedicatedServer_Data/StreamingAssets/Data/original.xml:ro ...
-```
-To ensure compatibility with mods, you should always specify the image version `hetsh/stationeers:<manifest_id>` and only upgrade once all mods are compatible.
-
 ## Automate startup and shutdown via systemd
 This [systemd unit file](https://github.com/Hetsh/docker-stationeers/blob/master/stationeers%40.service) is intended to launch containers on startup without additional software and only depends on a running docker daemon.
 It fits my personal setup, so you might need to adjust some parameters to your needs.
@@ -53,6 +40,16 @@ systemctl enable stationeers@<world> --now
 ## Docker-Compose
 An examplary [docker-compose file](https://github.com/Hetsh/docker-stationeers/blob/master/docker-compose.yml) was adapted from [#5](https://github.com/Hetsh/docker-stationeers/pull/5).
 It is intended to get you up and running quickly with docker-compose. It also showcases some basic configuration changes.
+
+## Updates
+This image contains a specific version of the game and will not update on startup, this decreases starting time and disk space usage.
+Version number is the manifest id that can also be found on [SteamDB](https://steamdb.info/depot/600762).
+This id and therefore the image on docker hub is updated hourly.
+
+## Yet Another Wiki
+More configuration examples and information about this image is documented in the [Wiki](https://github.com/Hetsh/docker-stationeers/wiki) like:
+* [Assigning a password](https://github.com/Hetsh/docker-stationeers/wiki/Password)
+* [Modding via XML-File](https://github.com/Hetsh/docker-stationeers/wiki/Modding)
 
 ## Fork Me!
 This is an open project (visit [GitHub](https://github.com/Hetsh/docker-stationeers)).
