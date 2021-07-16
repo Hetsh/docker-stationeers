@@ -13,6 +13,7 @@ ExecStartPre=-/bin/docker create \
               --publish 27015:27015/udp \
               --mount type=bind,source=/apps/stationeers/%I,target=/stationeers \
               --mount type=bind,source=/etc/localtime,target=/etc/localtime,readonly \
+              --stop-timeout 60 \
               hetsh/stationeers
 ExecStart=/bin/docker start --attach stationeers_%I
 ExecStop=/bin/docker stop stationeers_%I
