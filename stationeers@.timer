@@ -1,0 +1,8 @@
+[Unit]
+Description=Boot delay for Stationeers server
+
+[Timer]
+OnBootSec=1min
+
+[Install]
+WantedBy=timers.target
