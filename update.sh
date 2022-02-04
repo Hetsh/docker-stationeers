@@ -20,7 +20,7 @@ assert_dependency "curl"
 update_image "hetsh/steamcmd" "SteamCMD" "false" "\d+-\d+"
 
 # Stationeers
-update_depot "600762" "MANIFEST_ID" "Stationeers" "true"
+update_depot "600760" "600762" "MANIFEST_ID" "Stationeers" "true"
 
 if ! updates_available; then
 	#echo "No updates available."
