@@ -45,6 +45,9 @@ case "${1-}" in
 				.
 			docker push "$IMG_NAME:latest"
 			docker push "$IMG_NAME:$_NEXT_VERSION"
+			
+			# Remove version for easier image cleanup
+			docker image rm "$IMG_NAME:$_NEXT_VERSION"
 		fi
 	;;
 	# Build image without additonal steps
