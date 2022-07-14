@@ -1,4 +1,4 @@
-FROM hetsh/steamcmd:20220622-1
+FROM hetsh/steamcmd:20220711-1
 
 # App user
 ARG APP_USER="rocket"
@@ -9,7 +9,7 @@ RUN useradd --uid "$APP_UID" --user-group --create-home --home "$DATA_DIR" --she
 # Application
 ARG APP_ID=600760
 ARG DEPOT_ID=600762
-ARG MANIFEST_ID=4988721180279122172
+ARG MANIFEST_ID=6554447025627729565
 ARG APP_DIR="$STEAM_DIR/linux32/steamapps/content/app_$APP_ID/depot_$DEPOT_ID"
 RUN steamcmd.sh \
         +login anonymous \
