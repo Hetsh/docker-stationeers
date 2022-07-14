@@ -2,6 +2,6 @@ services:
   stationeers:
     image: hetsh/stationeers
     ports:
-      - "27016:27016/udp" # Steam Port (recommended - required for listing in server browser)
+      - 27016:27016/udp # Game Port (required)
     volumes:
-      - "/etc/localtime:/etc/localtime:ro" # Correct time for logs and more
+      - /etc/localtime:/etc/localtime:ro # Correct time for logs and more
