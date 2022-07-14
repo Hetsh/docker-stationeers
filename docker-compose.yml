@@ -1,6 +1,7 @@
 services:
   stationeers:
-    image: hetsh/stationeers
+    image: hetsh/stationeers:latest
+    build: .
     ports:
       - 27016:27016/udp # Game Port (required)
     volumes:
