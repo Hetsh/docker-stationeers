@@ -27,7 +27,7 @@ RUN steamcmd.sh \
         /root/Steam
 RUN ln -sf "$DATA_DIR" "$APP_DIR/saves"
 
-#      QUERY
+#      GAME
 EXPOSE 27016/udp
 
 # Launch parameters
