@@ -25,36 +25,13 @@ RUN steamcmd.sh \
         /tmp/dumps \
         /root/.steam \
         /root/Steam
+RUN ln -sf "$DATA_DIR" "$APP_DIR/saves"
 
-# Volume
-ARG LOG_DIR="/var/log/stationeers"
-RUN mkdir -p "$LOG_DIR" && \
-    chown -R "$APP_USER":"$APP_USER" "$LOG_DIR"
-VOLUME ["$DATA_DIR", "$LOG_DIR"]
-
-#      GAME      RCON      QUERY
-EXPOSE 27500/udp 27500/tcp 27015/udp
+#      GAME
+EXPOSE 27016/udp
 
 # Launch parameters
 USER "$APP_USER"
 WORKDIR "$DATA_DIR"
-ENV APP_DIR="$APP_DIR" \
-    LOG_DIR="$LOG_DIR" \
-    DATA_DIR="$DATA_DIR" \
-    SAVE_INTERVAL="300" \
-    CLEAR_INTERVAL="60" \
-    WORLD_TYPE="Moon" \
-    WORLD_NAME="Base" \
-    SERVER_OPTS=""
-ENTRYPOINT exec "$APP_DIR/rocketstation_DedicatedServer.x86_64" \
-    -batchmode \
-    -nographics \
-    -autostart \
-    -basedirectory="$DATA_DIR" \
-    -logfile="$LOG_DIR/game.log" \
-    -autosaveinterval="$SAVE_INTERVAL" \
-    -clearallinterval="$CLEAR_INTERVAL" \
-    -worldtype="$WORLD_TYPE" \
-    -worldname="$WORLD_NAME" \
-    -loadworld="$WORLD_NAME" \
-    $SERVER_OPTS
+ENV PATH="$APP_DIR:$PATH"
+ENTRYPOINT ["rocketstation_DedicatedServer.x86_64"]
