@@ -5,8 +5,6 @@ Requires=docker.service
 
 [Service]
 ExecStartPre=-/bin/docker create \
-              --env WORLD_TYPE=%I \
-              --env WORLD_NAME=%I \
               --rm \
               --name stationeers_%I \
               --publish 27016:27016/udp \
