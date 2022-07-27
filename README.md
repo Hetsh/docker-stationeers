@@ -1,6 +1,13 @@
 # Stationeers
 Simple to set up stationeers server.
 
+## Disclaimer: Refactor
+The server was rewritten from scratch in June 2022 (see [blogpost](https://store.steampowered.com/news/app/544550/view/3333239887479401585)).
+With the refactor came many usability changes, that have to be accounted for.
+From [tag 2071934691806169918-2](https://github.com/Hetsh/docker-stationeers/releases/tag/2071934691806169918-2) onwards, the image contains changes discussed in [issue #7](https://github.com/Hetsh/docker-stationeers/issues/7).
+I am depending on your feedback because I can't run any in-depth tests right now.
+So if you find any issues please open a ticket over [on GitHub](https://github.com/Hetsh/docker-stationeers/issues/new).
+
 ## Running the server
 ```bash
 docker run --detach --name stationeers --publish 27016:27016/udp hetsh/stationeers
@@ -25,7 +32,6 @@ docker run --mount type=bind,source=/path/to/storage,target=/stationeers ...
 ```
 
 ## Configuration
-The server was rewritten completely.
 It is currently best to stick to the official [server-guide](https://github.com/rocket2guns/StationeersDedicatedServerGuide) for now.
 Add launch parameters by appending them to the end:
 ```bash
