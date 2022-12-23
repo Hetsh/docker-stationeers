@@ -9,7 +9,7 @@ RUN useradd --uid "$APP_UID" --user-group --create-home --home "$DATA_DIR" --she
 # Application
 ARG APP_ID=600760
 ARG DEPOT_ID=600762
-ARG MANIFEST_ID=964572264280208355
+ARG MANIFEST_ID=4579620089963583874
 ARG APP_DIR="$STEAM_DIR/linux32/steamapps/content/app_$APP_ID/depot_$DEPOT_ID"
 RUN steamcmd.sh \
         +login anonymous \
